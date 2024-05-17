@@ -1,35 +1,25 @@
+// Haga la importaciones necesarias como dice el documento
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import searchRobots from './api'
+import SearchBar from './Components/SearchBar'
+import RobotsList from './Components/RobotsList'
+//searchRobots()
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  // Cree un estado robots de tipo ([]) utilizando useState
+const [robots, setRobots] = useState([])
+  // Construya una funcions handleSubmit asyncrona que recibe como paramentro term
+  // y sigua las instrucciones del documento 
+const handleSubmit = async(term) => {
+console.log('Usted esta buscando con:', term)
+const result = await searchRobots(term)
+setRobots(result)
 }
-
-export default App
+return (
+<>
+<h1>My Robots</h1>
+<SearchBar onSubmit={handleSubmit} />
+<RobotsList robots={robots} />
+</>
+)
+}
+export default Ap
